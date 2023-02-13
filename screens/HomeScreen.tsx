@@ -56,7 +56,7 @@ const HomeScreen = () => {
                 {/* Catigories */}
                 <Categories />
 
-                {/* Featureed*/}
+                {/* Featureed */}
                 <FeaturedRow
                 id="123"
                 title="Featured"
