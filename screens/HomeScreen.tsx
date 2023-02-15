@@ -31,7 +31,6 @@ const HomeScreen = () => {
             }
         }`).then((data: Featured[] )=>{
             setFeaturedCategories(data)
-            console.log(data)
         })
 
         

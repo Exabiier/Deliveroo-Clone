@@ -1,10 +1,23 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CategoriesCard from './CategoriesCard'
+import client, { urlFor } from '../Sanity';
+import category from '../sanityy/schemas/category';
 
 
 
 const Categories = () => {
+  const [categories, setCategories] = useState<category[]>([]);
+
+    useEffect(()=>{
+      client.fetch(
+        `*[_type == "category"]`
+      ).then(data => {
+        setCategories(data)
+      })
+
+    },[])
+
   return (
     <ScrollView
         contentContainerStyle={{
@@ -15,12 +28,15 @@ const Categories = () => {
         showsHorizontalScrollIndicator={false}
     >
         {/* Categoties Card */}
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
-        <CategoriesCard imgUrl="https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80" title='Testing' />
+
+        {categories.map((category: category)=>(
+            <CategoriesCard 
+            key={category._id}
+            imgUrl={urlFor(category.image).url()}
+            title={category.name}
+            />
+        )
+        )}
     </ScrollView>
   )
 }

@@ -1,7 +1,12 @@
-// this it the types for our RootStack
+// this it the types for our RootStack and Navigation
 type RootStackParamList = {
     Home: undefined;
+    Restaurant: undefined
 };
+
+type RestaurantScreenNavigationProp = NavigationProp<RootStackParamList, 'Restaurant'>
+
+type RestaurantScreenRouteProp = RouteProp<RootStackParamList, 'Restaurant'>
 
 // this is for the Restraunt type
 type Restraunt = {

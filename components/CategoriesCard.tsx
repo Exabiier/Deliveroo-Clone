@@ -7,6 +7,7 @@ type Props ={
 }
 
 const CategoriesCard = ({imgUrl, title}: Props) => {
+
   return (
     <TouchableOpacity className='relative mr-2'>
         <Image source={{uri: imgUrl}}
