@@ -1,18 +1,41 @@
 import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { UserIcon, ChevronDownIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon } from "react-native-heroicons/outline";
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
+import sanityClient from "@sanity/client";
+import client from '../Sanity';
+import Featured from '../sanityy/schemas/featured';
+
+
 
 const HomeScreen = () => {
     const navigation = useNavigation();
+    const [ featuredCategories, setFeaturedCategories ] = useState<Featured[]>([]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
         })
     },[])
+
+    useEffect(()=>{
+        //@ts-ignore - sanityClient. fetch does not have a type:
+        client.fetch(` 
+        *[_type == "featured"] {
+            ...,
+            restaurants[] -> {
+                ...,
+                dishes[] ->
+            }
+        }`).then((data: Featured[] )=>{
+            setFeaturedCategories(data)
+            console.log(data)
+        })
+
+        
+    }, [client])
 
   return (
     <SafeAreaView className='bg-white pt-5' >
@@ -56,26 +79,13 @@ const HomeScreen = () => {
                 {/* Catigories */}
                 <Categories />
 
-                {/* Featureed */}
-                <FeaturedRow
-                id="123"
-                title="Featured"
-                description="Paid placement form our partners"
-                FeaturedCategories="featured"/>
+                {featuredCategories?.map((category: Featured, index: number) => (<><FeaturedRow
+                    key={`${category._id}-${index}`}
+                    id={category._id}
+                    title={category.name}
+                    description="Paid placement form our partners"
+                     /></>))}
 
-                {/* Tasty Discount */}
-                <FeaturedRow
-                id="1234" 
-                title="Tasty Discounts"
-                description="Everyone's been enjoying tese juicy discounts!"
-                FeaturedCategories="discounts"/>
-
-                {/* Offers near you */}
-                <FeaturedRow
-                id="12345" 
-                title="Offers near you!"
-                description="Why not Support your local restaurant tonight!"
-                />
 
 
             </ScrollView>

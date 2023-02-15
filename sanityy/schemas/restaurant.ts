@@ -10,7 +10,6 @@ export default defineType({
         type: 'string',
         title: "Restaurant name",
         validation: (Rule) => Rule.required(),
-
       }),
 
     defineField({
@@ -55,7 +54,7 @@ export default defineType({
 
     //this is how you connect your input from you Categories to your Restraunt
     defineField({
-      name: 'type',
+      name: 'category',
       title: 'Category',
       validation: (Rule) => Rule.required(),
       type: 'reference',

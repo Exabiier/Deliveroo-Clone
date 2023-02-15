@@ -3,4 +3,4 @@ import category from './category'
 import dish from './dish'
 import restaurant from './restaurant'
 
-export const schemaTypes = [restaurant, dish, category, featured ]
+export const schemaTypes = [ restaurant, dish, category, featured ]
