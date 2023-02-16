@@ -5,6 +5,9 @@ import { urlFor } from '../Sanity'
 import { ArrowLeftIcon} from 'react-native-heroicons/solid'
 import { UserIcon, ChevronRightIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, StarIcon} from "react-native-heroicons/solid";
 import { MapPinIcon, QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
+import DishRow from '../components/DishRow'
+
+
 
 const RestaurantScreen = () => {
 
@@ -78,6 +81,19 @@ const RestaurantScreen = () => {
         <Text className="px-4 pt-6 mb-3 font-bold text-xl" >
           Menu
         </Text>
+        {/* Dishrows */}
+        {dishes.map((dish: dish)=>(
+          <DishRow
+          key={dish._id}
+          id={dish._id}
+          name={dish.name}
+          description = {dish.short_description}
+          price={dish.price}
+          image={dish.image}
+          />
+
+        ))}
+
       </View>
     </ScrollView>
   )

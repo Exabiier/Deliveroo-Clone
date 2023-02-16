@@ -78,12 +78,12 @@ const HomeScreen = () => {
                 {/* Catigories */}
                 <Categories />
 
-                {featuredCategories?.map((category: Featured, index: number) => (<><FeaturedRow
+                {featuredCategories?.map((category: Featured, index: number) => (<View key={category._id}><FeaturedRow
                     key={`${category._id}-${index}`}
                     id={category._id}
                     title={category.name}
                     description="Paid placement form our partners"
-                     /></>))}
+                     /></View>))}
 
 
 

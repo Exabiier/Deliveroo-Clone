@@ -46,9 +46,9 @@ const FeaturedRow = ({title, description, FeaturedCategories, id}: Props) => {
       className='pt-4'
       >
 
-        {restaurants?.map((restaurant) =>(
+        {restaurants?.map((restaurant, index) =>(
           <RestrauntCard
-          key={restaurant._id}
+          key={`${restaurant._id}-${index}`}
           id={restaurant._id}
           imgUrl={restaurant.image}
           title={restaurant.name}
