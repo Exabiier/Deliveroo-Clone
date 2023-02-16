@@ -86,5 +86,23 @@ type Featured = {
     _updatedAt: string,
 }
 
+/////////////////////////
+///    Redux Types   ///
+///////////////////////
 
+type BasketDispatch = {
+    id: string,
+    name: string,
+    description: string,
+    price: number,
+    image: asset,
+}
+
+type BasketDispatchAdd = {
+    id: string,
+    name: string,
+    description: string
+    price: number
+    image: asset
+}
 

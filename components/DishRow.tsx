@@ -3,22 +3,26 @@ import React, { useState } from 'react'
 import Dinero from 'dinero.js'
 import { urlFor } from '../Sanity'
 import { MinusCircleIcon, PlusCircleIcon } from 'react-native-heroicons/solid'
+import { useDispatch } from 'react-redux'
+import { addToBasket, selectBasketItems,  } from '../features/basketSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
 
+const DishRow = ({id, name, description, price, image}: BasketDispatch) => {
+    const items = useSelector(selectBasketItems);
+    const BasketItemArray = items.filter((item)=> {return item.id === id})
 
-type Props = {
-id: string,
-name: string,
-description: string
-price: number
-image: asset
-}
-
-const DishRow = ({id, name, description, price, image}: Props) => {
-    
+    console.log(BasketItemArray)
+    const dispatch = useDispatch();
+    console.log(name)
+    const addItemToBasket = () => {
+        dispatch(addToBasket({id, name, description, price, image}))
+    }
     const [ isPressed, setIsPressed ] = useState<boolean>(false);
+
+//  Dinero.js is used for currany convertion of money values from the backend
     const Din = Dinero;
     const prices = Din({amount: price * 100, currency: "USD"}).toFormat('$0,0.00');
-    
 
   return (
     <>
@@ -50,11 +54,12 @@ const DishRow = ({id, name, description, price, image}: Props) => {
                     <MinusCircleIcon color="#00CCBB" size={40} />    
                 </TouchableOpacity>
 
-                <Text>0</Text>
+                <Text>{BasketItemArray.length}</Text>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={addItemToBasket}>
                     <PlusCircleIcon color="#00CCBB" size={40} />
                 </TouchableOpacity>
+
             </View>
         </View>
     )}
