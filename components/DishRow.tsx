@@ -56,7 +56,7 @@ const DishRow = ({id, name, description, price, image}: BasketDispatch) => {
     {isPressed && (
         <View className="bg-white px-4">
             <View className="flex-row items-center space-x-2 pb-3">
-                
+
                 <TouchableOpacity disabled={!BasketItemArray.length} onPress={removeItemsFromBasket}>
                     <MinusCircleIcon color={(BasketItemArray.length) > 0 ?"#00CCBB": "grey"} size={40} />    
                 </TouchableOpacity>

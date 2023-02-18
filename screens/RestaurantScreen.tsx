@@ -6,6 +6,7 @@ import { ArrowLeftIcon} from 'react-native-heroicons/solid'
 import { UserIcon, ChevronRightIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, StarIcon} from "react-native-heroicons/solid";
 import { MapPinIcon, QuestionMarkCircleIcon } from 'react-native-heroicons/outline'
 import DishRow from '../components/DishRow'
+import BasketIcon from '../components/BasketIcon'
 
 
 
@@ -36,6 +37,7 @@ const RestaurantScreen = () => {
 
 
   return (
+    <>
     <ScrollView>
       <View className="relative">
         <Image
@@ -77,7 +79,7 @@ const RestaurantScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View className="pb-36">
         <Text className="px-4 pt-6 mb-3 font-bold text-xl" >
           Menu
         </Text>
@@ -91,11 +93,12 @@ const RestaurantScreen = () => {
           price={dish.price}
           image={dish.image}
           />
-
         ))}
 
       </View>
     </ScrollView>
+    <BasketIcon />
+    </>
   )
 }
 

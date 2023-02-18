@@ -4,9 +4,9 @@ import { RootState } from "../store";
 interface BasketDispatchs {
     id: string,
     name: string,
-    description: string
-    price: number
-    image: asset
+    description: string,
+    price: number,
+    image: asset,
 }
 
 interface InitialStateSlice {
@@ -48,6 +48,10 @@ export const { addToBasket, removeFromBasket } = basketSlice.actions;
 
 // this allows you to get the data from your global state in redux:
 export const selectBasketItems = (state: RootState) => state.basket.items;
+
+export const selectBasketItemsWithId = (state: RootState, id: string) => {state.basket.items.filter((item)=> item.id === id)}
+
+export const selectBasketTotal = ( state: RootState ) =>  state.basket.items.reduce((total, item ) => total += item.price, 0)
 
 // this is how we connect the reducer to our store:
 export default basketSlice.reducer;
