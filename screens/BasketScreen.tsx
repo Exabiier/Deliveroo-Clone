@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux';
 import { XCircleIcon } from 'react-native-heroicons/solid';
 import { urlFor } from '../Sanity';
 import Dinero from 'dinero.js';
+import { totalCost, totalCostAll, priceOfItem } from '../Extras/DineroFunctions'
 
-// TODO make notes on the Object.entries() method
 
 const BasketScreen = () => {
     const navigation = useNavigation<OrderScreenNavigationProp>();
@@ -27,38 +27,6 @@ const BasketScreen = () => {
       setGroupedItemsInBasket(groupedItems)
     }, [items])
 
-    
-    // Dinero object
-    const Din = Dinero;
-
-    // Callback Function for  total amount in basket
-    const totalCost = (total: number) => {
-      if (!total || typeof total !== "number") {
-        return "$0.00";
-      }
-      let prices = Din({ amount: total * 100, currency: "USD" }).toFormat("$0,0.00");
-      return prices;
-    };
-
-    // CallBack function for calculating bothe Delivery and subtotal:
-    const totalCostAll = (total: number) => {
-      if (!total || typeof total !== "number") {
-        return "0.00";
-      }
-      let prices = Din({ amount: total * 100, currency: "USD" }).toFormat("0,0.00");
-      return prices;
-    };
-
-    // Call back function for every individual Basket item
-    const priceOfItem = (price : number) => {
-      if (isNaN(price)) {
-        return "0.00";
-      } else {
-        const priceOfItems = Din({amount: price * 100, currency: "USD"}).toFormat('$0,0.00');
-        return priceOfItems;
-      }
-    }
-
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 bg-gray-100">
@@ -66,7 +34,8 @@ const BasketScreen = () => {
         <View className="p-5 border-b border-[#00CCBB] bg-white shadow-xs">
           <View>
             <Text className="text-lg font-bold text-center">Basket</Text>
-            <Text className="text-center text-gray-400">{restaurant.title}</Text>
+            <Text className="text-center text-gray-400">{//@ts-ignore restaurant value is only null when backend is not connected
+            restaurant.title}</Text>
           </View>
           <TouchableOpacity onPress={navigation.goBack}
           className="rounded-full bg-gray-100 absolute top-3 right-5">
@@ -130,13 +99,7 @@ const BasketScreen = () => {
           <TouchableOpacity disabled={items.length < 1 } onPress={() =>navigation.navigate("OrderScreen")} className={items.length > 0 ? "rounded-lg  bg-[#00CCBB] p-4" : "rounded-lg  bg-gray-400 p-4"}>
           <Text className="text-center text-white text-lg font-bold">Place Order</Text>
           </TouchableOpacity>
-
         </View>
-
-
-
-        
-
       </View>
     </SafeAreaView>
   )
