@@ -4,6 +4,7 @@ type RootStackParamList = {
     Restaurant: undefined;
     Basket: undefined;
     OrderScreen: undefined;
+    Delivery: undefined;
 };
 
 type RestaurantScreenNavigationProp = NavigationProp<RootStackParamList, 'Restaurant'>
@@ -11,6 +12,12 @@ type RestaurantScreenNavigationProp = NavigationProp<RootStackParamList, 'Restau
 type RestaurantScreenRouteProp = RouteProp<RootStackParamList, 'Restaurant'>
 
 type BasketScreenNavigationProp = NavigationProp<RootStackParamList, 'Basket'>
+
+type OrderScreenNavigationProp = NavigationProp<RootStackParamList, "OrderScreen">
+
+type DeliveryScreenNavigationProp = NavigationProp<RootStackParamList, 'Delivery'>
+
+type HomeScreenNavigationProp = NavigationProp<RootStackParamList, 'Home'>
 
 
 // this is for the Restraunt type

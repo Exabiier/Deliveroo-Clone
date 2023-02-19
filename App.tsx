@@ -9,8 +9,9 @@ import { Provider } from 'react-redux';
 import {store} from './store';
 import BasketScreen from './screens/BasketScreen';
 import PreparingOrderScreen from './screens/PreparingOrderScreen';
+import DeliveryScreen from './screens/DeliveryScreen';
 
-// todo We nee to change the adresses for our app
+// TODO We nee to change the adresses for our app
 // TODO We need to Make sure that we make that Dinero does not act up when that basket is empty
 // TODO we need to make sure that we say that there is no item in the basket when there is no food in basket
 // TODO We need to change the name length of RedRobin so it fits thew screen 
@@ -29,6 +30,7 @@ export default function App() {
             <Stack.Screen name="Restaurant" component={RestaurantScreen} />
             <Stack.Screen name="Basket" component={BasketScreen} options={{presentation: 'modal', headerShown: false}} />
             <Stack.Screen name="OrderScreen" component={PreparingOrderScreen} options={{ presentation: "fullScreenModal", headerShown: false}}/>
+            <Stack.Screen name="Delivery" component={DeliveryScreen} options={{ presentation:"fullScreenModal",  headerShown: false}}/>
           </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -12,7 +12,7 @@ import Dinero from 'dinero.js';
 // TODO make notes on the Object.entries() method
 
 const BasketScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<OrderScreenNavigationProp>();
     const restaurant = useSelector(selectRestaurant);
     const items = useSelector(selectBasketItems);
     const basketTotal = useSelector(selectBasketTotal);
@@ -119,7 +119,7 @@ const BasketScreen = () => {
 
           <View className="flex-row justify-between">
             <Text className="text-gray-400">Delivery Fee: </Text>
-            <Text className="text-gray-400" >{items.length > 0 ?totalCost(599/100): "$0.00"}</Text>
+            <Text className="text-gray-400" >{items.length > 0 ? totalCost(599/100): "$0.00"}</Text>
           </View>
 
           <View className="flex-row justify-between">
@@ -127,7 +127,7 @@ const BasketScreen = () => {
             <Text className="font-extrabold" >${(parseFloat(totalCostAll(basketTotal)) + (items.length > 0 ? parseFloat(totalCostAll(599/100)): 0.00)).toFixed(2)}</Text>
           </View>
 
-          <TouchableOpacity className="rounded-lg  bg-[#00CCBB] p-4">
+          <TouchableOpacity disabled={items.length < 1 } onPress={() =>navigation.navigate("OrderScreen")} className={items.length > 0 ? "rounded-lg  bg-[#00CCBB] p-4" : "rounded-lg  bg-gray-400 p-4"}>
           <Text className="text-center text-white text-lg font-bold">Place Order</Text>
           </TouchableOpacity>
 
