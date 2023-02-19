@@ -1,12 +1,17 @@
 // this it the types for our RootStack and Navigation
 type RootStackParamList = {
     Home: undefined;
-    Restaurant: undefined
+    Restaurant: undefined;
+    Basket: undefined;
+    OrderScreen: undefined;
 };
 
 type RestaurantScreenNavigationProp = NavigationProp<RootStackParamList, 'Restaurant'>
 
 type RestaurantScreenRouteProp = RouteProp<RootStackParamList, 'Restaurant'>
+
+type BasketScreenNavigationProp = NavigationProp<RootStackParamList, 'Basket'>
+
 
 // this is for the Restraunt type
 type Restraunt = {
@@ -44,6 +49,16 @@ type dish = {
     _type: string,
     _updatedAt: string,
 }
+
+type DishCheckOut = {
+    description: string, 
+    id: string,
+    image: { asset: asset , _type?: string},
+    name: string,
+    price: number
+}
+
+type GroupedItems = Record<string, BasketDispatch[]>
 
 // The type for restraunts:
 type category = { 
@@ -101,8 +116,8 @@ type BasketDispatch = {
 type BasketDispatchAdd = {
     id: string,
     name: string,
-    description: string
-    price: number
-    image: asset
+    description: string,
+    price: number,
+    image: asset,
 }
 

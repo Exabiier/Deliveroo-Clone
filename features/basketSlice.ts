@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-interface BasketDispatchs {
+export interface BasketDispatchs {
     id: string,
     name: string,
     description: string,
